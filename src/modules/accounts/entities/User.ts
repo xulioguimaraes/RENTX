@@ -18,6 +18,9 @@ class User {
   drive_license: string;
 
   @Column()
+  avatar: string;
+
+  @Column()
   isAdmin: boolean;
 
   @CreateDateColumn()
