@@ -1,8 +1,9 @@
+import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
+import { IUserRepository } from "@modules/accounts/repositories/IUserRepository";
+import AppDataSource from "@shared/infra/typeorm";
 import { Repository } from "typeorm";
-import AppDataSource from "../../../../database";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { User } from "../../entities/User";
-import { IUserRepository } from "../IUserRepository";
+import { User } from "../entities/User";
+
 
 class UserRepository implements IUserRepository {
   async findById(id: string): Promise<User> {
