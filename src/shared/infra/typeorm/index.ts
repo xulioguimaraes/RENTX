@@ -6,8 +6,9 @@ const AppDataSource = new DataSource({
   port: 5432,
   username: "docker",
   password: "1234",
+  synchronize: true,
   database: "rentx",
-  migrations: ["./src/database/migrations/*.ts"],
+  migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
   entities: ["./src/modules/**/entities/*.ts"],
 });
 export function createConnection(host = "database"): Promise<DataSource> {

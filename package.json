@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js -d src/database/index.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js -d src/shared/infra/typeorm/index.ts",
     "test": "jest"
   },
   "license": "MIT",
