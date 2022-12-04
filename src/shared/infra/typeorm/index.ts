@@ -9,7 +9,7 @@ const AppDataSource = new DataSource({
   synchronize: true,
   database: "rentx",
   migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
-  entities: ["./src/modules/**/entities/*.ts"],
+  entities: ["./src/modules/**/infra/typeorm/entities/*.{ts, js}"],
 });
 export function createConnection(host = "database"): Promise<DataSource> {
   return AppDataSource.setOptions({ host }).initialize();
