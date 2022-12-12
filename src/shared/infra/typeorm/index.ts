@@ -6,7 +6,7 @@ const AppDataSource = new DataSource({
   port: 5432,
   username: "docker",
   password: "1234",
-  synchronize: true,
+  // synchronize: true,
   database: "rentx",
   migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
   entities: ["./src/modules/**/infra/typeorm/entities/*.{ts, js}"],

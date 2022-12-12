@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from "typeorm";
 
 export class Cars1669924515893 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -51,20 +56,22 @@ export class Cars1669924515893 implements MigrationInterface {
             default: "now()",
           },
         ],
+        foreignKeys: [
+          {
+            name: "FKCategoryCars",
+            referencedTableName: "categories",
+            referencedColumnNames: ["id"],
+            columnNames: ["category_id"],
+            onDelete: "SET NULL",
+            onUpdate: "SET NULL",
+          },
+        ],
       })
     );
-    await queryRunner.createForeignKey("cars", new TableForeignKey({
-        name: "FKCategoryCars",
-        referencedTableName: "categories",
-        referencedColumnNames: ["id"],
-        columnNames: ["category_id"],
-        onDelete: "SET NULL",
-        onUpdate: "SET NULL",
-      },))
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey("cars", "FKCategoryCars")
-    await queryRunner.dropTable("cars")
+    await queryRunner.dropForeignKey("cars", "FKCategoryCars");
+    await queryRunner.dropTable("cars");
   }
 }
