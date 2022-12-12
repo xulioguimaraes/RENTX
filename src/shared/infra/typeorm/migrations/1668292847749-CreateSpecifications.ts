@@ -10,7 +10,8 @@ export class CreateSpecifications1668292847749 implements MigrationInterface {
             name: "id",
             type: "uuid",
             isPrimary: true,
-            isNullable: true,
+            generationStrategy: "uuid",
+            // default: "uuid_generate_v4()",
           },
           {
             name: "name",
@@ -32,6 +33,5 @@ export class CreateSpecifications1668292847749 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable("specifications");
-
   }
 }
