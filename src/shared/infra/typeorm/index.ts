@@ -12,7 +12,10 @@ const AppDataSource = new DataSource({
   entities: ["./src/modules/**/infra/typeorm/entities/*.{ts, js}"],
 });
 export function createConnection(host = "database"): Promise<DataSource> {
-  return AppDataSource.setOptions({ host }).initialize();
+  return AppDataSource.setOptions({
+    host: process.env.NODE_ENV === "test" ? "localhost" : host,
+    ...(process.env.NODE_ENV === "test" && { database: "rentx_test" }),
+  }).initialize();
 }
 
 export default AppDataSource;
