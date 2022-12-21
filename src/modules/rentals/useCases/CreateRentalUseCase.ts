@@ -2,7 +2,7 @@ import { IDateProvider } from "@shared/container/providers/DateProvider/IDatePro
 import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
 
-import { Rental } from "../infra/typeorm/entites/Rental";
+import { Rental } from "../infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "../repositories/IRentalsRepository";
 
 interface IRequest {

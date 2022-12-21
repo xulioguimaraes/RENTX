@@ -2,7 +2,7 @@ import { ICreateRentalDTO } from "@modules/rentals/dtos/ICreateRentalDTO";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
 import AppDataSource from "@shared/infra/typeorm";
 import { Repository } from "typeorm";
-import { Rental } from "../entites/Rental";
+import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 
 class RentalsRepository implements IRentalsRepository {
   private repository: Repository<Rental>;

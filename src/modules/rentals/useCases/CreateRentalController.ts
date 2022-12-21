@@ -15,7 +15,7 @@ class CreateRentalController {
       expected_return_date,
       user_id: id,
     });
-    return response.json(201).json(rental);
+    return response.status(201).json(rental);
   }
 }
 
