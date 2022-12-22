@@ -11,8 +11,8 @@ const AppDataSource = new DataSource({
   migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
   entities: ["./src/modules/**/infra/typeorm/entities/*.{ts, js}"],
 });
-export function createConnection(host = "database"): Promise<DataSource> {
-  return AppDataSource.setOptions({
+export async function createConnection(host = "database"): Promise<DataSource> {
+  return await AppDataSource.setOptions({
     host: process.env.NODE_ENV === "test" ? "localhost" : host,
     ...(process.env.NODE_ENV === "test" && { database: "rentx_test" }),
   }).initialize();

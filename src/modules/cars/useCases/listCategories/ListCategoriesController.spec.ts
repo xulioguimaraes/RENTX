@@ -1,13 +1,12 @@
-import { app } from "@shared/infra/http/app";
-import request from "supertest";
+import { User } from "@modules/accounts/infra/typeorm/entities/User";
 import { createConnection } from "@shared/infra/typeorm";
 import { hash } from "bcrypt";
-import { v4 } from "uuid";
-import { User } from "@modules/accounts/infra/typeorm/entities/User";
 import { DataSource } from "typeorm";
+import { v4 } from "uuid";
+import request from "supertest";
+import { app } from "@shared/infra/http/app";
 let connection: DataSource;
-// createConnection("localhost");
-describe("Create category controller", () => {
+describe("List Categories", () => {
   beforeAll(async () => {
     const id = v4();
     connection = await createConnection("localhost");
@@ -37,13 +36,13 @@ describe("Create category controller", () => {
     await connection.dropDatabase();
     await connection.destroy();
   });
-  it("should be able to create a new category", async () => {
+  it("should be able to list all categories cars", async () => {
     const responseToken = await request(app).post("/sessions").send({
       email: "julio@gmail.com",
       password: "admin",
     });
     const { token } = responseToken.body;
-    const response = await request(app)
+    const res = await request(app)
       .post("/categories")
       .send({
         description: "Description supertest",
@@ -52,35 +51,12 @@ describe("Create category controller", () => {
       .set({
         Authorization: `Bearer ${token}`,
       });
-    expect(response.status).toBe(201);
-  });
+    console.log(res.status);
 
-  it(" Should not be able to create a new category with name exists", async () => {
-    const responseToken = await request(app).post("/sessions").send({
-      email: "julio@gmail.com",
-      password: "admin",
-    });
-    const { token } = responseToken.body;
-    await request(app)
-      .post("/categories")
-      .send({
-        description: "Description supertest",
-        name: "Category superteste",
-      })
-      .set({
-        Authorization: `Bearer ${token}`,
-      });
-    const response = await request(app)
-      .post("/categories")
-      .send({
-        description: "Description supertest",
-        name: "Category superteste",
-      })
-      .set({
-        Authorization: `Bearer ${token}`,
-      });
-    expect(response.status).toBe(400);
-  });
+    const { body, status } = await request(app).get("/categories");
+    console.log(body);
 
- 
+    expect(status).toBe(200);
+    // expect(body.length).toBe(1);
+  });
 });
