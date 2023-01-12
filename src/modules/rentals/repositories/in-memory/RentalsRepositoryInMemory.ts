@@ -3,6 +3,7 @@ import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "../IRentalsRepository";
 
 class RentalsRepositoryInMemory implements IRentalsRepository {
+
   rentals: Rental[] = [];
   async create({
     car_id,
@@ -30,6 +31,12 @@ class RentalsRepositoryInMemory implements IRentalsRepository {
     return this.rentals.find(
       (rental) => rental.car_id === car_id && !rental.end_date
     );
+  }
+  async findByUser(user_id: string): Promise<Rental[]> {
+    return this.rentals.filter(rental => rental.user_id === user_id)
+  }
+  async findById(id: string): Promise<Rental> {
+    return this.rentals.find(rental => rental.id === id)
   }
 }
 
