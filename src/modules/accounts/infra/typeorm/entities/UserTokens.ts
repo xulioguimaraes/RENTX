@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { User } from "./User";
 import { v4 as uuidV4 } from "uuid";
+
 @Entity("users_tokens")
 class UserTokens {
   @PrimaryColumn()
@@ -20,7 +21,7 @@ class UserTokens {
   user_id: string;
 
   @ManyToOne(() => User)
-  @JoinColumn()
+  @JoinColumn({ name: "user_id" })
   user: User;
 
   @Column()
