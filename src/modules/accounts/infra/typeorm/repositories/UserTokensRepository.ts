@@ -9,6 +9,10 @@ class UserTokensRepository implements IUsersTokensRepository {
   constructor() {
     this.repository = AppDataSource.getRepository(UserTokens);
   }
+  async deleteById(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
+
   async create({
     expires_date,
     refresh_token,
@@ -22,6 +26,12 @@ class UserTokensRepository implements IUsersTokensRepository {
 
     await this.repository.save(userToken);
     return userToken;
+  }
+  async findByUserIdAndRefreshToken(
+    user_id: string,
+    refresh_token: string
+  ): Promise<UserTokens> {
+    return await this.repository.findOne({ where: { user_id, refresh_token } });
   }
 }
 export { UserTokensRepository };
