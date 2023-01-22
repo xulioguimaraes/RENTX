@@ -2,6 +2,7 @@ import { ICreateUserTokenDTO } from "../dtos/ICreateUserTokenDTO";
 import { UserTokens } from "../infra/typeorm/entities/UserTokens";
 
 interface IUsersTokensRepository {
+  finByRefreshToken(refresh_token: string): Promise<UserTokens>;
   deleteById(id: string): Promise<void>;
   findByUserIdAndRefreshToken(
     user_id: string,

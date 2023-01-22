@@ -9,6 +9,9 @@ class UserTokensRepository implements IUsersTokensRepository {
   constructor() {
     this.repository = AppDataSource.getRepository(UserTokens);
   }
+  async finByRefreshToken(refresh_token: string): Promise<UserTokens> {
+    return await this.repository.findOne({ where: { refresh_token } });
+  }
   async deleteById(id: string): Promise<void> {
     await this.repository.delete(id);
   }
