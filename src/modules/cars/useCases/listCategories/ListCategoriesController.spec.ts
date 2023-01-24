@@ -41,7 +41,7 @@ describe("List Categories", () => {
       email: "julio@gmail.com",
       password: "admin",
     });
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
     const res = await request(app)
       .post("/categories")
       .send({
@@ -49,7 +49,7 @@ describe("List Categories", () => {
         name: "Category superteste",
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       });
     console.log(res.status);
 

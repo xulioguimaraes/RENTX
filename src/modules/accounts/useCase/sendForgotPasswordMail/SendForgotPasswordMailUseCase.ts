@@ -43,7 +43,7 @@ class SendForgotPasswordMailUseCase {
       name: user.name,
       link: `http://localhost:3333/password/reset?token=${token}`,
     };
-    console.log(process.env)
+    // console.log(process.env)
     
     await this.mailprovider.sendMail(
       email,
