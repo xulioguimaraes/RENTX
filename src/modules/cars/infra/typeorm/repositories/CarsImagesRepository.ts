@@ -9,6 +9,9 @@ class CarsImagesRepository implements ICarsImagesRepository {
   constructor() {
     this.repository = AppDataSource.getRepository(CarImage);
   }
+  async listImageCars(id: string): Promise<CarImage[]> {
+    return this.repository.find({ where: { car_id: id } });
+  }
   async create(car_id: string, image_name: string): Promise<CarImage> {
     const carImage = this.repository.create({
       car_id,

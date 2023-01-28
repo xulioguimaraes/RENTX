@@ -10,6 +10,9 @@ class CarsRepository implements ICarsRepository {
   constructor() {
     this.repository = AppDataSource.getRepository(Car);
   }
+  async findAllCars(): Promise<Car[]> {
+    return this.repository.createQueryBuilder("cars").getMany();
+  }
   async updateAvailable(id: string, available: boolean): Promise<void> {
     await this.repository
       .createQueryBuilder()
